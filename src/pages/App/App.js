@@ -5,36 +5,60 @@ import { Route, Switch } from 'react-router-dom';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import CalendarPage from '../../pages/CalendarPage/CalendarPage';
+import userService from '../../utils/userService';
 
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {...this.getInitialState()};
+    this.state = {
+      ...this.getInitialState(),
+      user: userService.getUser()
+    };
   }
 
   getInitialState() {
     return {
-      testState: 'Hello'
+      // testState: 'Hello'
     };
   }  
+
+  handleLogout = () => {
+    userService.logout();
+    this.setState({ user: null });
+  }
+
+  handleSignupOrLogin = () => {
+    this.setState({user: userService.getUser()});
+  }
   
   render() {
     return (
       <div>
         <header className='App-header'><h1>Dentist Appointment</h1></header>
         <Switch>
-            <Route exact path='/' render={() => 
+            {/* <Route exact path='/' render={() => 
               <CalendarPage
+              handleLogout={this.handleLogout}
+              user={this.state.user}
               />
-            }/>
+            }/> */}
             <Route exact path='/signup' render={({ history }) => 
               <SignupPage
                 history={history}
+                handleSignupOrLogin={this.handleSignupOrLogin}
               />
             }/>
-            <Route exact path='/login' render={() => 
+            <Route exact path='/login' render={({ history }) => 
               <LoginPage
+                history={history}
+                handleSignupOrLogin={this.handleSignupOrLogin}
+              />
+            }/>
+            <Route exact path='/' render={() => 
+              <CalendarPage
+              handleLogout={this.handleLogout}
+              user={this.state.user}
               />
             }/>
         </Switch>
