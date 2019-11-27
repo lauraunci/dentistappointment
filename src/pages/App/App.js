@@ -6,6 +6,8 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import CalendarPage from '../../pages/CalendarPage/CalendarPage';
 import userService from '../../utils/userService';
+import NewAppointmentPage from '../../pages/NewAppointmentPage/NewAppointmentPage';
+import EditAppointmentPage from '../../pages/EditAppointmentPage/EditAppointmentPage';
 
 
 class App extends Component {
@@ -37,12 +39,12 @@ class App extends Component {
       <div>
         <header className='App-header'><h1>Dentist Appointment</h1></header>
         <Switch>
-            {/* <Route exact path='/' render={() => 
+            <Route exact path='/' render={() => 
               <CalendarPage
               handleLogout={this.handleLogout}
               user={this.state.user}
               />
-            }/> */}
+            }/>
             <Route exact path='/signup' render={({ history }) => 
               <SignupPage
                 history={history}
@@ -55,10 +57,14 @@ class App extends Component {
                 handleSignupOrLogin={this.handleSignupOrLogin}
               />
             }/>
-            <Route exact path='/' render={() => 
-              <CalendarPage
-              handleLogout={this.handleLogout}
-              user={this.state.user}
+            <Route exact path='/newappointment' render={( apt ) => 
+              <NewAppointmentPage
+              apt={apt}
+              />
+            }/>
+            <Route exact path='/editappointment' render={( apt ) => 
+              <EditAppointmentPage
+              apt={apt}
               />
             }/>
         </Switch>
