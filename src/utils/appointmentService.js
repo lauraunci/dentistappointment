@@ -1,4 +1,4 @@
-const BASE_URL = '/api/appointments/';
+const BASE_URL = '/api/appointments';
 
 function create(aptdata) {
   return fetch(BASE_URL, {
@@ -30,7 +30,8 @@ function update(aptdata) {
 
 function deleteOne(id) {
   return fetch(`${BASE_URL}/${id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {'content-type': 'application/json'},
   }).then(res => res.json());
 }
 

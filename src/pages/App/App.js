@@ -63,10 +63,11 @@ class App extends Component {
   }
 
   handleDeleteAppointment= async id => {
+    console.log(id)
     await appointmentService.deleteOne(id);
     this.setState(state => ({
       // Yay, filter returns a NEW array
-      appointments: state.appointments.filter(a => a._id !== id)
+      appointments: this.state.appointments.filter(a => a._id !== id)
     }), () => this.props.history.push('/'));
   }
   
@@ -107,7 +108,7 @@ class App extends Component {
             <Route exact path='/appointments' render={({apt}) => 
             <ListAppointmentsPage
               apt={apt}
-              handleDeletePuppy={this.handleDeletePuppy}
+              handleDeleteAppointment={this.handleDeleteAppointment}
             />
           } />
             <Route exact path='/editappointment' render={( apt ) => 

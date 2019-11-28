@@ -14,6 +14,14 @@ class ListAppointmentsPage extends Component {
         };
       }
 
+    // async handleDeleteAppointment (id) {
+    //     const a = await appointmentService.deleteOne(id);
+    //     this.setState(state => ({
+    //       // Yay, filter returns a NEW array
+    //       appointments: state.appointments.filter(a => a._id !== id)
+    //     }), () => this.props.history.push('/'));
+    // }
+
     async componentDidMount() {
         const appointments = await appointmentService.getAll();
         console.log(appointments);
@@ -23,9 +31,9 @@ class ListAppointmentsPage extends Component {
     render() {
         return (
         <div>
-            <h1>Appointments</h1> <Link to='/'>Back to Calendar</Link>
+            <h1>Appointments</h1> 
+            <Link to='/'>Back to Calendar</Link>
             <div>
-
                 <div>
                 <table>
                     <thead>
@@ -38,10 +46,14 @@ class ListAppointmentsPage extends Component {
                             <th>Phone</th>
                             <th>Insurance</th>
                             <th>Notes</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     {this.state.appointments.map((appointment, index) => (
-                        <tbody key={index}>
+                        <tbody key={index}
+                        // handleDeleteAppointment={props.handleDeleteAppointment}
+                        >
                             <tr>
                                 <td>{appointment.date}</td>
                                 <td>{appointment.time}</td>
@@ -51,6 +63,8 @@ class ListAppointmentsPage extends Component {
                                 <td>{appointment.phone}</td>
                                 <td>{appointment.insurance}</td>
                                 <td>{appointment.notes}</td>
+                                <td><Link className='btn btn-xs btn-warning' to={{pathname: '/editappointment'}}>Edit</Link></td>
+                                <td><button className='btn btn-xs btn-danger margin-left-10' onClick={() => this.props.handleDeleteAppointment(appointment._id)}>DELETE</button></td>
                             </tr>
                         </tbody>
                     ))}

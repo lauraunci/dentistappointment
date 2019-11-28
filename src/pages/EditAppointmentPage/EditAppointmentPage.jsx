@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import AppointmentForm from '../../components/AppointmentForm/AppointmentForm';
+import { Link } from 'react-router-dom';
+// import AppointmentForm from '../../components/AppointmentForm/AppointmentForm';
 import './EditAppointmentPage.css';
 
 class EditAppointmentPage extends Component {    
@@ -9,7 +10,7 @@ class EditAppointmentPage extends Component {
             <div className='EditAppointmentPage'>
                 <h2>Edit Appointment</h2>
                 <hr />
-                <AppointmentForm {...this.props} />
+                <Link to='/appointments'>Back to Appointments</Link>
             </div>
         );
     }
