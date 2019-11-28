@@ -12,6 +12,7 @@ const CalendarPage = (props) => {
             />
             <h1>Calendar</h1>
             <p>Please click to <Link to='/newappointment'>Book Appointment</Link></p>
+            <Link to='/appointments'>Appointments List</Link>
         </div>
         :
         <div>
@@ -27,6 +28,7 @@ const CalendarPage = (props) => {
         <div className="CalendarPage">
             {calendar}
         </div>
+        
     );
 }
 

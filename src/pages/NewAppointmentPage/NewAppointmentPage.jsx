@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import AppointmentForm from '../../components/AppointmentForm/AppointmentForm';
 import './NewAppointmentPage.css';
 
-class NewAppointmentPage extends Component {    
-    
+class NewAppointmentPage extends Component { 
+
     render() {
         return (
             <div className='NewAppointmentPage'>

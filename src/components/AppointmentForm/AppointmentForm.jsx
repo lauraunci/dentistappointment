@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import appointmentService from '../../utils/appointmentService';
+import './AppointmentForm.css';
 
 class AppointmentForm extends Component {
-   constructor(props){
+    constructor(props){
         super(props);
         this.state = {
             date: props.apt.date || '',
@@ -13,24 +14,26 @@ class AppointmentForm extends Component {
             email: props.apt.email || '',
             phone: props.apt.phone || '',
             insurance: props.apt.insurance || '',
-            notes: props.apt.notes || '',
+            notes: props.apt.notes || ''
         };
-    }
-
-    handleChange = (e) => {
-        this.setState({
-          [e.target.name]: e.target.value
-        });
     }
 
     handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          await appointmentService.create(this.state);
-          this.props.apt.push('/id');
+          let newAppt = await appointmentService.create(this.state);
+          this.props.handleAddAppointment(newAppt);
+        //   this.props.history.push('/');
         } catch (err) {
-          alert('Invalid Info!');
+        //   this.props.updateMessage(err.message);
+        console.log(err);
         }
+      }
+
+    handleChange = (e) => {
+        this.setState({
+          [e.target.name]: e.target.value
+        });
     }
 
     isFormInvalid() {

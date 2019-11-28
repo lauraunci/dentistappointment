@@ -16,7 +16,6 @@ async function signup(req, res) {
     res.json({token});
   } catch (err) {
     console.log(err)
-    // Probably a duplicate email
     res.status(400).json(err);
   }
 }

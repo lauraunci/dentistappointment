@@ -1,16 +1,42 @@
 const BASE_URL = '/api/appointments/';
 
 function create(aptdata) {
-  const options = {
+  return fetch(BASE_URL, {
     method: 'POST',
-    headers: {
-      'Content-type': 'application/json'
-    },
+    headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(aptdata)
-  };
-  return fetch(BASE_URL, options).then(res => res.json());
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    throw new Error('Something is wrong!');
+  });
+}
+
+function getAll() {
+  return fetch(BASE_URL, {
+    method: 'GET',
+    headers: {'content-type': 'application/json'},
+  })
+  .then(res => res.json());
+}
+
+function update(aptdata) {
+  return fetch(`${BASE_URL}/${aptdata._id}`, {
+    method: 'PUT',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify(aptdata)
+  }).then(res => res.json());
+}
+
+function deleteOne(id) {
+  return fetch(`${BASE_URL}/${id}`, {
+    method: 'DELETE'
+  }).then(res => res.json());
 }
 
 export default {
-  create
+  create, 
+  getAll,
+  update,
+  deleteOne
 };
